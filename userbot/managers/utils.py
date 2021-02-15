@@ -48,7 +48,7 @@ async def edit_or_reply(
                 .get("key")
             )
             text = linktext + f" [here](https://nekobin.com/{key})"
-        except:
+        except Exception:
             text = re.sub(r"•", ">>", text)
             kresult = requests.post(
                 "https://del.dog/documents", data=text.encode("UTF-8")
