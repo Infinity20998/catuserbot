@@ -1,4 +1,4 @@
- 
+  
 # Afk plugin from catuserbot ported from uniborg
 import asyncio
 from datetime import datetime
@@ -268,16 +268,3 @@ __afk means away from keyboard/keypad__
         """
     }
 )
-
-
-
-
-
-
-
-
-
-
-
-
-
