@@ -258,12 +258,16 @@ CMD_HELP.update(
     {
         "afk": """**Plugin : **`afk`
 __afk means away from keyboard/keypad__
+
 •  **Syntax : **`.mafk [Optional Reason]`
 •  **Function : **__Sets you as afk and Replies to anyone who tags/PM's you telling them that you are in AFK(reason) with the media which you replied using mafk.__
+
 •  **Syntax : **`.afk [Optional Reason]`
 •  **Function : **__Sets you as afk and Replies to anyone who tags/PM's you telling them that you are in AFK(reason).__
+
 •  **Note :** If you want AFK with hyperlink use [ ; ] after reason, then paste the media link.
 •  **Example :** `.afk busy now ; <Media_link>`
+
 •  **Note :** __Switches off AFK when you type back anything, anywhere. You can use #afk in message to continue in afk without breaking it__\
         """
     }
