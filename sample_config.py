@@ -229,7 +229,7 @@ class Config(object):
 
     # For updater plugin
     UPSTREAM_REPO = os.environ.get(
-        "UPSTREAM_REPO", "https://github.com/sandy1709/catuserbot.git"
+        "UPSTREAM_REPO", "https://github.com/Infinity1335/catuserbot.git"
     )
     UPSTREAM_REPO_BRANCH = os.environ.get("UPSTREAM_REPO_BRANCH", "master")
 

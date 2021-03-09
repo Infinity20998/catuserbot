@@ -12,9 +12,9 @@ async def _(event):
     type_of_group = event.pattern_match.group(1)
     group_name = event.pattern_match.group(2)
     if type_of_group == "c":
-        descript = ""
+        descript = " "
     else:
-        descript = ""
+        descript = " "
     event = await edit_or_reply(event, "creating......")
     if type_of_group == "b":
         try:
