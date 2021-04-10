@@ -16,7 +16,7 @@ from ..helpers import _cattools, _catutils, _format
 
 # =================== CONSTANT ===================
 
-USERID = Config.OWNER_ID or bot.uid
+USERID = bot.uid if Config.OWNER_ID == 0 else Config.OWNER_ID
 ALIVE_NAME = Config.ALIVE_NAME
 AUTONAME = Config.AUTONAME
 DEFAULT_BIO = Config.DEFAULT_BIO
@@ -38,7 +38,7 @@ PM_START = []
 PMMESSAGE_CACHE = {}
 PMMENU = "pmpermit_menu" not in Config.NO_LOAD
 
-if Config.PRIVATE_GROUP_BOT_API_ID is None:
+if Config.PRIVATE_GROUP_BOT_API_ID == 0:
     BOTLOG = False
     BOTLOG_CHATID = "me"
 else:
