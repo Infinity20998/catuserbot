@@ -1,4 +1,4 @@
-from . import fonts
+from . import emojify,fonts
 from . import memeshelper as catmemes
 from .aiohttp_helper import AioHttp
 from .functions import *
