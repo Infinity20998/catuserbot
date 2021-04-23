@@ -82,6 +82,8 @@ class Config(object):
     NO_LOAD = [x for x in os.environ.get("NO_LOAD", "").split()]
     # For custom alive pic
     ALIVE_PIC = os.environ.get("ALIVE_PIC", None)
+    # for Custom ialive pic
+    IALIVE_PIC = os.environ.get("IALIVE_PIC", None)
     # for Custom pmpermit pic
     PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC", None)
     # for custom pic for .digitalpfp
