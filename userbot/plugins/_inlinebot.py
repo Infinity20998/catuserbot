@@ -9,7 +9,7 @@ from telethon import Button, custom, events
 
 from . import CMD_LIST, catalive
 
-CAT_IMG = Config.ALIVE_PIC or None
+CAT_IMG = Config.IALIVE_PIC or None
 BTN_URL_REGEX = re.compile(r"(\[([^\[]+?)\]\<buttonurl:(?:/{0,2})(.+?)(:same)?\>)")
 
 if Config.TG_BOT_USERNAME is not None and tgbot is not None:
