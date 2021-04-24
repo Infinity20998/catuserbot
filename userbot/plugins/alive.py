@@ -120,7 +120,7 @@ async def amireallyalive(alive):
     _, check_sgnirts = check_data_base_heal_th()
     await edit_or_reply(
             alive,
-            f"**𝙏𝙝𝙚 𝙨𝙩𝙖𝙩𝙨 𝙤𝙛 𝙮𝙤𝙪𝙧 𝙘𝙖𝙩 𝙪𝙨𝙚𝙧𝙗𝙤𝙩 𝙖𝙧𝙚 :**\n\n"
+            f"**𝙏𝙝𝙚 𝙨𝙩𝙖𝙩𝙨 𝙤𝙛 𝙮𝙤𝙪𝙧 𝙘𝙖𝙩𝙪𝙨𝙚𝙧𝙗𝙤𝙩 𝙖𝙧𝙚 :**\n\n"
             f"**{EMOJI} Database :** `{check_sgnirts}`\n"
             f"**{EMOJI} Telethon Version :** `{version.__version__}\n`"
             f"**{EMOJI} Catuserbot Version :** `{catversion}`\n"
