@@ -50,7 +50,7 @@ AFK_REASONS = [
 "I am gonna be the pirate king !!",
 "Gummo gummo no bye bye...",
 "Give up on your dreams and die.",
-"Sohinzou sasageyo",
+"Shinzou sasageyo!",
 "Sayonara Darling ~ 02",
 ]
 
