@@ -110,8 +110,8 @@ async def amireallyalive(alive):
     await alive.delete()
     
    
-@bot.on(admin_cmd(outgoing=True, pattern="salive$"))
-@bot.on(sudo_cmd(pattern="salive$", allow_sudo=True))
+@bot.on(admin_cmd(outgoing=True, pattern="calive$"))
+@bot.on(sudo_cmd(pattern="calive$", allow_sudo=True))
 async def amireallyalive(alive):
     if alive.fwd_from:
         return
@@ -167,7 +167,7 @@ CMD_HELP.update(
       \n  •  **Function : **__status of bot will be showed__\
       \n\n  •  **Syntax : **`.ialive` \
       \n  •  **Function : **__inline status of bot will be shown.__\
-      \n\n  •  **Syntax : **`.salive` \
+      \n\n  •  **Syntax : **`.calive` \
       \n  •  **Function : **__To check the stats of your bot.__\
       \n\nSet `ALIVE_PIC` var for media in alive message and set `IALIVE_PIC` for media in ialive message"
     }
