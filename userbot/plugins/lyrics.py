@@ -58,13 +58,13 @@ async def lyrics(lyric):
     else:
         await edit_or_reply(
             lyric,
-            "Error: please use '-' as divider for <artist> and <song> \neg: `.glyrics Nicki Minaj - Super Bass`",
+            "Error: please use '-' as divider for <artist> and <song> \neg: `.glyrics Alan Walker - Fake a smile`",
         )
         return
     if r"-" not in query:
         await edit_or_reply(
             lyric,
-            "Error: please use '-' as divider for <artist> and <song> \neg: `.glyrics Nicki Minaj - Super Bass`",
+            "Error: please use '-' as divider for <artist> and <song> \neg: `.glyrics Alan Walker - Fake a smile`",
         )
         return
     if GENIUS is None:
@@ -106,7 +106,7 @@ async def lyrics(lyric):
         os.remove("lyrics.txt")
     else:
         await catevent.edit(
-            f"**Search query**: \n`{artist} - {song}`\n\n```{songs.lyrics}```"
+            f"**Search query**: \n`{artist} - {song}`\n\n{songs.lyrics}"
         )
     return
 
