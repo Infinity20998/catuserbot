@@ -28,7 +28,9 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
                     Button.url("Repo", "https://github.com/sandy1709/catuserbot"),
                 )
             ]
-            if CAT_IMG and CAT_IMG.endswith((".jpg", ".png")):
+            PIC = list(Config.IALIVE_PIC)
+            CAT = random.choice(PIC)
+            if CAT_IMG and CAT.endswith((".jpg", ".png")):
                 result = builder.photo(
                     CAT_IMG,
                     # title="Alive cat",
@@ -37,7 +39,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
                 )
             elif CAT_IMG:
                 result = builder.document(
-                    CAT_IMG,
+                    CAT,
                     title="Alive cat",
                     text=query,
                     buttons=buttons,
