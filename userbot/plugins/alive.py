@@ -8,7 +8,7 @@ from telethon import version
 from . import ALIVE_NAME, StartTime, catversion, get_readable_time, mention, reply_id
 
 DEFAULTUSER = ALIVE_NAME or "cat"
-CAT_IMG = Config.ALIVE_PIC
+CAT_IMG = Config.ALIVE_PIC or None
 EMOJI = Config.CUSTOM_ALIVE_EMOJI or "  ✥ "
 
 ANIME_QUOTE = [
@@ -74,10 +74,12 @@ async def amireallyalive(alive):
     uptime = await get_readable_time((time.time() - StartTime))
     _, check_sgnirts = check_data_base_heal_th()
     if CAT_IMG:
+        PIC = list(Config.ALIVE_PIC)
+        CAT = random.choice(PIC)
         cat_caption = f"**{CUSTOM_ALIVE_TEXT}**\n\n"
         cat_caption += f"**{EMOJI} Sama :** {mention}\n"
         await alive.client.send_file(
-            alive.chat_id, CAT_IMG, caption=cat_caption, reply_to=reply_to_id
+            alive.chat_id, CAT, caption=cat_caption, reply_to=reply_to_id
         )
         await alive.delete()
     else:
