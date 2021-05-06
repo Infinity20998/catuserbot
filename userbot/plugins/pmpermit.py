@@ -3,6 +3,7 @@ import asyncio
 from telethon import events, functions
 
 from . import (
+    mention,
     ALIVE_NAME,
     PM_START,
     PMMENU,
@@ -19,7 +20,7 @@ PREV_REPLY_MESSAGE = {}
 CACHE = {}
 PMPERMIT_PIC = Config.PMPERMIT_PIC
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "cat"
-USER_BOT_WARN_ZERO = "You were spamming my peru master's inbox, henceforth you are blocked by my master's userbot. **Now GTFO, i'm playing minecraft** "
+USER_BOT_WARN_ZERO = "**You were spamming my master** {mention}**'s inbox, henceforth you have been blocked.**"
 
 
 if Config.PRIVATE_GROUP_ID != 0:
