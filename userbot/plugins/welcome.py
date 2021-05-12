@@ -1,4 +1,7 @@
 # ported from paperplaneExtended by avinashreddy3108 for media support
+import os
+
+Clean = bool(os.environ.get("CLEAN_WELCOME", True))
 
 from telethon import events
 
@@ -20,7 +23,7 @@ async def _(event):
         and (event.user_joined or event.user_added)
         and not (await event.get_user()).bot
     ):
-        if Config.CLEAN_WELCOME:
+        if Clean:
             try:
                 await bot.delete_messages(event.chat_id, cws.previous_welcome)
             except Exception as e:
