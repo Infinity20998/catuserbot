@@ -69,7 +69,7 @@ class Config(object):
     # set this value with your required name for telegraph plugin
     TELEGRAPH_SHORT_NAME = os.environ.get("TELEGRAPH_SHORT_NAME", "catuserbot")
     # Set False to stop deleting old welcome messages
-    CLEAN_WELCOME = os.environ.get("CLEAN_WELCOME", True)
+    CLEAN_WELCOME = bool(os.environ.get("CLEAN_WELCOME", True))
     # for custom thumb image set this with your required thumb telegraoh link
     THUMB_IMAGE = os.environ.get(
         "THUMB_IMAGE", "https://telegra.ph/file/ca95524e4734b0d5461b5.jpg"
