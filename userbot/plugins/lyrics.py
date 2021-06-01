@@ -48,8 +48,8 @@ async def _(event):
             await catevent.delete()
     else:
         await catevent.edit(reply)
-        
-        
+
+
 @bot.on(admin_cmd(pattern="ilyrics (.*)"))
 @bot.on(sudo_cmd(pattern="ilyrics (.*)", allow_sudo=True))
 async def song(event):

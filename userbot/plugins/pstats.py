@@ -1,16 +1,20 @@
 import base64
 import time
-from telethon.tl.custom import Dialog
-from telethon.tl.types import Channel, Chat, User
+
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
+from telethon.tl.types import Channel, Chat, User
 
 # =========================================================== #
 #                           STRINGS                           #
 # =========================================================== #
 STAT_INDICATION = "`Collecting stats, this may take several minutes`"
 PCHANNELS_STR = "**The list of Public channels in which you are their are here **\n\n"
-PCHANNELS_ADMINSTR = "**The list of Public channels in which you are admin are here **\n\n"
-PCHANNELS_OWNERSTR = "**The list of Public channels in which you are owner are here **\n\n"
+PCHANNELS_ADMINSTR = (
+    "**The list of Public channels in which you are admin are here **\n\n"
+)
+PCHANNELS_OWNERSTR = (
+    "**The list of Public channels in which you are owner are here **\n\n"
+)
 PGROUPS_STR = "**The list of Public groups in which you are their are here **\n\n"
 PGROUPS_ADMINSTR = "**The list of Public groups in which you are admin are here **\n\n"
 PGROUPS_OWNERSTR = "**The list of Public groups in which you are owner are here **\n\n"
@@ -74,6 +78,7 @@ async def stats(event):
             caption=caption,
         )
 
+
 @bot.on(admin_cmd(pattern="pstat (g|ga|go)$"))
 @bot.on(sudo_cmd(pattern="pstat (g|ga|go)$", allow_sudo=True))
 async def stats(event):
@@ -134,14 +139,17 @@ async def stats(event):
             caption=caption,
         )
 
+
 def inline_mention(user):
     full_name = user_full_name(user) or "No Name"
     return f"[{full_name}](tg://user?id={user.id})"
+
 
 def user_full_name(user):
     names = [user.first_name, user.last_name]
     names = [i for i in list(names) if i]
     return " ".join(names)
+
 
 CMD_HELP.update(
     {

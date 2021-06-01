@@ -1,5 +1,4 @@
 # ported from paperplaneExtended by avinashreddy3108 for media support
-import os
 
 Clean = Config.CLEAN_WELCOME or True
 from telethon import events
@@ -18,7 +17,7 @@ from . import BOTLOG_CHATID, LOGS
 async def _(event):
     cws = get_current_welcome_settings(event.chat_id)
     if (
-        cws 
+        cws
         and (event.user_joined or event.user_added)
         and not (await event.get_user()).bot
     ):

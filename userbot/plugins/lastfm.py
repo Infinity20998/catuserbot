@@ -194,7 +194,7 @@ async def current(event):
     results = await event.client.inline_query(bot, "current")
     await results[0].click(event.chat_id)
     await event.delete()
-    
+
 
 @bot.on(admin_cmd(outgoing=True, pattern=r"lastbio (on|off)"))
 async def lastbio(lfmbio):
