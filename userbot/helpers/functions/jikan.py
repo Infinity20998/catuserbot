@@ -6,11 +6,10 @@ from io import BytesIO, StringIO
 import bs4
 import jikanpy
 import requests
-from jikanpy import Jikan
+from html_telegraph_poster import TelegraphPoster
 from telethon.tl.types import DocumentAttributeAnimated
 from telethon.utils import is_video
 
-jikan = Jikan()
 url = "https://graphql.anilist.co"
 # Anime Helper
 
@@ -202,7 +201,7 @@ def getBannerLink(mal, kitsu_search=True):
     return getPosterLink(mal)
 
 
-def get_anime_manga(mal_id, search_type, _user_id):  # sourcery no-metrics
+def get_anime_manga(mal_id, search_type, _user_id):
     jikan = jikanpy.jikan.Jikan()
     if search_type == "anime_anime":
         result = jikan.anime(mal_id)
@@ -210,7 +209,7 @@ def get_anime_manga(mal_id, search_type, _user_id):  # sourcery no-metrics
         if trailer:
             LOL = f"<a href='{trailer}'>Trailer</a>"
         else:
-            LOL = "<i>No Trailer Available</i>"
+            LOL = "<code>No Trailer Available</code>"
         image = getBannerLink(mal_id)
         studio_string = ", ".join(
             studio_info["name"] for studio_info in result["studios"]
@@ -232,7 +231,7 @@ def get_anime_manga(mal_id, search_type, _user_id):  # sourcery no-metrics
     alternative_names.extend(result["title_synonyms"])
     if alternative_names:
         alternative_names_string = ", ".join(alternative_names)
-        caption += f"\n<b>Also known as</b>: <i>{alternative_names_string}</i>"
+        caption += f"\n<b>Also known as</b>: <code>{alternative_names_string}</code>"
     genre_string = ", ".join(genre_info["name"] for genre_info in result["genres"])
     if result["synopsis"] is not None:
         synopsis = result["synopsis"].split(" ", 60)
@@ -250,10 +249,12 @@ def get_anime_manga(mal_id, search_type, _user_id):  # sourcery no-metrics
         caption += textwrap.dedent(
             f"""
         🆎 <b>Type</b>: <i>{result['type']}</i>
+        🆔 <b>MAL ID</b>: <i>{result['mal_id']}</i>
         📡 <b>Status</b>: <i>{result['status']}</i>
         🎙️ <b>Aired</b>: <i>{result['aired']['string']}</i>
         🔢 <b>Episodes</b>: <i>{result['episodes']}</i>
-        💯 <b>Score</b>: <i>{result['score']}</i>
+        💯 <b>Score</b>: <i>{result['score']}/10</i>
+        🔞 <b>Rating</b>: <i>{result['rating']}</i>
         🌐 <b>Premiered</b>: <i>{result['premiered']}</i>
         ⌛ <b>Duration</b>: <i>{result['duration']}</i>
         🎭 <b>Genres</b>: <i>{genre_string}</i>
@@ -295,6 +296,17 @@ def get_poster(query):
     if image is not None:
         # img_path = wget.download(image, os.path.join(Config.DOWNLOAD_LOCATION, 'imdb_poster.jpg'))
         return image
+
+
+def post_to_telegraph(anime_title, html_format_content):
+    post_client = TelegraphPoster(use_api=True)
+    auth_name = "@Catuserbot"
+    bish = "https://t.me/Catuserbot"
+    post_client.create_api_token(auth_name)
+    post_page = post_client.post(
+        title=anime_title, author=auth_name, author_url=bish, text=html_format_content
+    )
+    return post_page["url"]
 
 
 def replace_text(text):
