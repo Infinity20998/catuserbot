@@ -146,7 +146,7 @@ async def on_afk(event):  # sourcery no-metrics
         if AFK_.afk_type == "media":
             if AFK_.reason:
                 message_to_reply = (
-                    f"**I am AFK .\n\nAFK Since {endtime}\nReason :** __{AFK_.reason}__"
+                    f"**I am AFK .\n\nAFK Since {endtime}\nReason :** `{AFK_.reason}`"
                 )
             else:
                 message_to_reply = f"** {AFKR}**\n\n**AFK Since :** {endtime}"
@@ -155,11 +155,11 @@ async def on_afk(event):  # sourcery no-metrics
         elif AFK_.afk_type == "text":
             if AFK_.msg_link and AFK_.reason:
                 message_to_reply = (
-                    f"**I am AFK .\n\nAFK Since {endtime}\nReason : **{AFK_.reason}"
+                    f"**I am AFK .\n\nAFK Since {endtime}\nReason : **`{AFK_.reason}`"
                 )
             elif AFK_.reason:
                 message_to_reply = (
-                    f"**I am AFK .\n\nAFK Since {endtime}\nReason :** __{AFK_.reason}__"
+                    f"**I am AFK .\n\nAFK Since {endtime}\nReason :** `{AFK_.reason}`"
                 )
             else:
                 message_to_reply = f"** {AFKR}**\n\n**AFK Since :** {endtime}"
