@@ -27,7 +27,7 @@ class LOG_CHATS:
 LOG_CHATS_ = LOG_CHATS()
 
 
-@catub.cat_cmd(incoming=True, func=lambda e: e.is_private, edited=False, forword=None)
+@catub.cat_cmd(incoming=True, func=lambda e: e.is_private, forword=None)
 async def monito_p_m_s(event):  # sourcery no-metrics
     if not Config.PM_LOGGER_GROUP_ID:
         return
