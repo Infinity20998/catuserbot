@@ -150,7 +150,7 @@ async def on_afk(event):  # sourcery no-metrics
                 )
             elif AFK_.reason:
                 message_to_reply = (
-                    f"`I am AFK .\n\nAFK Since {endtime}\nReason : {AFK_.reason}`"
+                    f"**I am AFK .\n\nAFK Since {endtime}\nReason :** __{AFK_.reason}__"
                 )
             else:
                 message_to_reply = f"** {AFKR}**\n\n**AFK Since :** {endtime}"
