@@ -1,4 +1,6 @@
+# plugin edited by @Infinity20998
 import asyncio
+import random
 from datetime import datetime
 
 from telethon.tl import functions, types
@@ -32,6 +34,35 @@ class AFK:
 
 
 AFK_ = AFK()
+
+AFK_REASONS = [
+    "Sorry I left you in oven, gotta go.",
+    "brb in 2 minutes, if I don't come read this sentence again.",
+    "My fishes were drowning, went to save them.",
+    "Busy learning HTML to hack NASA.",
+    "1. I will be back later.\n2. Later = IDK",
+    "I went to the void.",
+    "Brb, not in the mood to be alive.",
+    "I am away from keyboard wait for me to come back maybe.",
+    "My cat jumped on the afk switch...........",
+    "Got a fire in the house, gotta go to control my magmar.",
+    "FBI raided my house, I'm on the run !!!",
+    "Busy proving the flat earth theory.",
+    "Went To Get Isekai-ed !!",
+    "Black hole appearing in the next billion years, need to pack my bags ASAP.",
+    "Breaking nokia 3310, pray I'll be back soon.",
+    "Busy searching mitsuha to my taki.",
+    "Busy summoning the Infinite Tsukuyomi.",
+    "Teaching itadori to eat fingers.",
+    "Just did my first domain expansion so kinda busy",
+    "Figuring out my quirk.",
+    "Ara ara sayonara...",
+    "I am gonna be the pirate king !!",
+    "Gummo gummo no bye bye...",
+    "Give up on your dreams and die.",
+    "Shinzou sasageyo!",
+    "Sayonara Darling ~ 02",
+]
 
 
 @catub.cat_cmd(outgoing=True)
@@ -110,6 +141,7 @@ async def on_afk(event):  # sourcery no-metrics
         return False
     if not await event.get_sender():
         return
+    AFKR = f"{random.choice(AFK_REASONS)}"
     if AFK_.USERAFK_ON and not (await event.get_sender()).bot:
         msg = None
         if AFK_.afk_type == "text":
@@ -118,20 +150,16 @@ async def on_afk(event):  # sourcery no-metrics
                     f"**I am AFK .\n\nAFK Since {endtime}\nReason : **{AFK_.reason}"
                 )
             elif AFK_.reason:
-                message_to_reply = (
-                    f"`I am AFK .\n\nAFK Since {endtime}\nReason : {AFK_.reason}`"
-                )
+                message_to_reply = f"**I am AFK .**\n\n**AFK Since** __{endtime}__\n**Reason :** `{AFK_.reason}`"
             else:
-                message_to_reply = f"`I am AFK .\n\nAFK Since {endtime}\nReason : Not Mentioned ( ಠ ʖ̯ ಠ)`"
+                message_to_reply = f"** {AFKR}**\n\n**AFK Since :** {endtime}"
             if event.chat_id not in Config.UB_BLACK_LIST_CHAT:
                 msg = await event.reply(message_to_reply)
         elif AFK_.afk_type == "media":
             if AFK_.reason:
-                message_to_reply = (
-                    f"`I am AFK .\n\nAFK Since {endtime}\nReason : {AFK_.reason}`"
-                )
+                message_to_reply = f"**I am AFK .**\n\n**AFK Since** __{endtime}__\n**Reason :** `{AFK_.reason}`"
             else:
-                message_to_reply = f"`I am AFK .\n\nAFK Since {endtime}\nReason : Not Mentioned ( ಠ ʖ̯ ಠ)`"
+                message_to_reply = f"** {AFKR}**\n\n**AFK Since :** {endtime}"
             if event.chat_id not in Config.UB_BLACK_LIST_CHAT:
                 msg = await event.reply(message_to_reply, file=AFK_.media_afk.media)
         if event.chat_id in AFK_.last_afk_message:
@@ -178,7 +206,7 @@ async def on_afk(event):  # sourcery no-metrics
             "{tr}afk <reason> ; <link>",
         ],
         "examples": "{tr}afk Let Me Sleep",
-        "note": "Switches off AFK when you type back anything, anywhere. You can use #afk in message to continue in afk without breaking it",
+        "note": "Switches off AFK when you type back anything, anywhere. You can use #afk in message to continue in afk without breaking it\n If no reason is given it will take random reasons.",
     },
 )
 async def _(event):
@@ -208,10 +236,10 @@ async def _(event):
         AFK_.USERAFK_ON = f"on: {AFK_.reason}"
         if AFK_.reason:
             await edit_delete(
-                event, f"`I shall be Going afk! because ~` {AFK_.reason}", 5
+                event, f"**I shall be Going afk! because ~** __{AFK_.reason}__", 5
             )
         else:
-            await edit_delete(event, f"`I shall be Going afk! `", 5)
+            await edit_delete(event, f"**I shall be Going afk!**", 5)
         if BOTLOG:
             if AFK_.reason:
                 await event.client.send_message(
@@ -272,10 +300,10 @@ async def _(event):
         AFK_.USERAFK_ON = f"on: {AFK_.reason}"
         if AFK_.reason:
             await edit_delete(
-                event, f"`I shall be Going afk! because ~` {AFK_.reason}", 5
+                event, f"**I shall be Going afk! because ~** __{AFK_.reason}__", 5
             )
         else:
-            await edit_delete(event, f"`I shall be Going afk! `", 5)
+            await edit_delete(event, f"**I shall be Going afk!**", 5)
         AFK_.media_afk = await reply.forward_to(BOTLOG_CHATID)
         if AFK_.reason:
             await event.client.send_message(
