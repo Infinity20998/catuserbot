@@ -1,9 +1,11 @@
+# plugin edited by @Infinity20998
 import asyncio
 from datetime import datetime
 
 from userbot import catub
 
 from ..core.managers import edit_or_reply
+from . import mention
 
 plugin_category = "tools"
 
@@ -30,12 +32,14 @@ async def _(event):
         end = datetime.now()
         tms = (end - start).microseconds / 1000
         ms = round((tms - 0.6) / 3, 3)
-        await catevent.edit(f"Average Pong!\n`{ms} ms`")
+        await catevent.edit(
+            f"┏━━━━━━━━━━━┓\n┃ ⁭⁫⌘ Average Pong!\n┃ ⁭⁫⌘ `{ms}`\n┃ ⁭⁫⌘ {mention}\n┗━━━━━━━━━━━┛"
+        )
     else:
         catevent = await edit_or_reply(event, "Pong!")
         end = datetime.now()
         ms = (end - start).microseconds / 1000
-        await catevent.edit(f"Pong!\n`{ms} ms`")
+        await catevent.edit(f"┏━━━━━━━┓\n┃ ⁭⁫⌘ `{ms}`\n┃ ⁭⁫⌘ {mention}\n┗━━━━━━━┛")
 
 
 @catub.cat_cmd(
