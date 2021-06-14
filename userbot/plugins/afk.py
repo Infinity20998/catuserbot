@@ -35,6 +35,7 @@ class AFK:
 
 AFK_ = AFK()
 
+
 AFK_REASONS = [
     "Sorry I left you in oven, gotta go.",
     "brb in 2 minutes, if I don't come read this sentence again.",
@@ -90,9 +91,7 @@ async def set_not_afk(event):
             else:
                 endtime += f"{m}m {s}s" if m > 0 else f"{s}s"
     current_message = event.message.message
-    if (("afk" not in current_message) or ("#afk" not in current_message)) and (
-        "on" in AFK_.USERAFK_ON
-    ):
+    if ("afk" not in current_message) and ("on" in AFK_.USERAFK_ON):
         shite = await event.client.send_message(
             event.chat_id,
             "`Back alive! No Longer afk.\nWas afk for " + endtime + "`",
@@ -137,7 +136,7 @@ async def on_afk(event):  # sourcery no-metrics
             else:
                 endtime += f"{m}m {s}s" if m > 0 else f"{s}s"
     current_message_text = event.message.message.lower()
-    if "afk" in current_message_text or "#afk" in current_message_text:
+    if "afk" in current_message_text:
         return False
     if not await event.get_sender():
         return
@@ -150,14 +149,18 @@ async def on_afk(event):  # sourcery no-metrics
                     f"**I am AFK .\n\nAFK Since {endtime}\nReason : **{AFK_.reason}"
                 )
             elif AFK_.reason:
-                message_to_reply = f"**I am AFK .**\n\n**AFK Since** __{endtime}__\n**Reason :** `{AFK_.reason}`"
+                message_to_reply = (
+                    f"`I am AFK .\n\nAFK Since {endtime}\nReason : {AFK_.reason}`"
+                )
             else:
                 message_to_reply = f"** {AFKR}**\n\n**AFK Since :** {endtime}"
             if event.chat_id not in Config.UB_BLACK_LIST_CHAT:
                 msg = await event.reply(message_to_reply)
         elif AFK_.afk_type == "media":
             if AFK_.reason:
-                message_to_reply = f"**I am AFK .**\n\n**AFK Since** __{endtime}__\n**Reason :** `{AFK_.reason}`"
+                message_to_reply = (
+                    f"**I am AFK .\n\nAFK Since {endtime}\nReason :** __{AFK_.reason}__"
+                )
             else:
                 message_to_reply = f"** {AFKR}**\n\n**AFK Since :** {endtime}"
             if event.chat_id not in Config.UB_BLACK_LIST_CHAT:
@@ -206,7 +209,7 @@ async def on_afk(event):  # sourcery no-metrics
             "{tr}afk <reason> ; <link>",
         ],
         "examples": "{tr}afk Let Me Sleep",
-        "note": "Switches off AFK when you type back anything, anywhere. You can use #afk in message to continue in afk without breaking it\n If no reason is given it will take random reasons.",
+        "note": "Switches off AFK when you type back anything, anywhere. You can use #afk in message to continue in afk without breaking it",
     },
 )
 async def _(event):
@@ -236,10 +239,10 @@ async def _(event):
         AFK_.USERAFK_ON = f"on: {AFK_.reason}"
         if AFK_.reason:
             await edit_delete(
-                event, f"**I shall be Going afk! because ~** __{AFK_.reason}__", 5
+                event, f"`I shall be Going afk! because ~` {AFK_.reason}", 5
             )
         else:
-            await edit_delete(event, f"**I shall be Going afk!**", 5)
+            await edit_delete(event, f"`I shall be Going afk! `", 5)
         if BOTLOG:
             if AFK_.reason:
                 await event.client.send_message(
@@ -300,10 +303,10 @@ async def _(event):
         AFK_.USERAFK_ON = f"on: {AFK_.reason}"
         if AFK_.reason:
             await edit_delete(
-                event, f"**I shall be Going afk! because ~** __{AFK_.reason}__", 5
+                event, f"`I shall be Going afk! because ~` {AFK_.reason}", 5
             )
         else:
-            await edit_delete(event, f"**I shall be Going afk!**", 5)
+            await edit_delete(event, f"`I shall be Going afk! `", 5)
         AFK_.media_afk = await reply.forward_to(BOTLOG_CHATID)
         if AFK_.reason:
             await event.client.send_message(
