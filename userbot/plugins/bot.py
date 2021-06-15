@@ -26,8 +26,8 @@ async def botmsg(event):
         )
     await event.client.tgbot.send_message(chat, text, reply_to=reply_to_id)
     await event.delete()
-    
-    
+
+
 @catub.cat_cmd(
     pattern="mbot(?: |$)(.*)",
     command=("mbot", plugin_category),

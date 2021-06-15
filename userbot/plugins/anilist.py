@@ -58,9 +58,8 @@ async def anilist(event):
     else:
         ms_g += f"\n**Episode**:{response['episodes']}\n**Status**: `N/A`"
     await edit_or_reply(event, ms_g)
-    
-    
-    
+
+
 @catub.cat_cmd(
     pattern="anime(?: |$)(.*)",
     command=("anime", plugin_category),
@@ -137,8 +136,8 @@ async def get_manga(event):
     await event.client.send_file(
         event.chat_id, file=image, caption=caption, parse_mode="html", reply_to=reply_to
     )
-    
-    
+
+
 @catub.cat_cmd(
     pattern="ianime(?: |$)(.*)",
     command=("ianime", plugin_category),
@@ -220,7 +219,7 @@ async def manga(event):
         rep += f'<b>Read More:</b> <a href="{url}">MyAnimeList</a>'
         await edit_or_reply(event, rep, parse_mode="HTML", link_preview=True)
 
-               
+
 @catub.cat_cmd(
     pattern="tanime ?(.*)",
     command=("tanime", plugin_category),
