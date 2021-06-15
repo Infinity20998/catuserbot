@@ -36,19 +36,15 @@ async def bot_help(event):
     await event.reply(
         f"""The commands in the bot are:
 **Note : **__This commands work only in this bot__ {botusername}
-
 • **Cmd : **/uinfo <reply to user message>
 • **Info : **__You have noticed that forwarded stickers/emoji doesn't have forward tag so you can identify the user who sent thoose messages by this cmd.__
 • **Note : **__It works for all forwarded messages. even for users who's permission forward message nobody.__
-
 • **Cmd : **/ban <reason> or /ban <username/userid> <reason>
 • **Info : **__Reply to a user message with reason so he will be notified as you banned from the bot and his messages will not be forworded to you further.__
 • **Note : **__Reason is must. without reason it won't work. __
-
 • **Cmd : **/unban <reason(optional)> or /unban <username/userid>
 • **Info : **__Reply to user message or provide username/userid to unban from the bot.__
 • **Note : **__To check banned users list use__ `{cmhd}bblist`.
-
 • **Cmd : **/broadcast
 • **Info : **__Reply to a message to get broadcasted to every user who started your bot. To get list of users use__ `{cmhd}bot_users`.
 • **Note : **__if user stoped/blocked the bot then he will be removed from your database that is he will erased from the bot_starters list.__
@@ -71,7 +67,10 @@ async def bot_broadcast(event):
     bot_users_count = len(get_all_starters())
     if bot_users_count == 0:
         return await event.reply("`No one started your bot yet.`")
-    for user in get_all_starters():
+    users = get_all_starters()
+    if users is None:
+        return await event.reply("`Errors ocured while fetching users list.`")
+    for user in users:
         try:
             await event.client.send_message(
                 int(user.user_id), "🔊 You received a **new** Broadcast."
@@ -80,9 +79,9 @@ async def bot_broadcast(event):
             await asyncio.sleep(0.8)
         except FloodWaitError as e:
             await asyncio.sleep(e.seconds)
-        except (BadRequestError, ForbiddenError):
+        except (BadRequestError, ValueError, ForbiddenError):
             del_starter_from_db(int(user.user_id))
-        except Exception:
+        except Exception as e:
             LOGS.error(str(e))
             if BOTLOG:
                 await event.client.send_message(
