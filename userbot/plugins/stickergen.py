@@ -4,7 +4,7 @@ import urllib
 from ..helpers.functions import clippy, convert_tosticker, higlighted_text
 from . import catub, deEmojify, edit_delete, reply_id
 
-plugin_category = "useless"
+plugin_category = "fun"
 
 
 @catub.cat_cmd(
