@@ -23,8 +23,8 @@ GENIUS = os.environ.get("GENIUS_API_TOKEN", None)
             "{tr}lyrics <artist name> - <song name>",
         ],
         "examples": [
-            "{tr}lyrics butta bomma",
-            "{tr}lyrics Armaan Malik - butta bomma",
+            "{tr}lyrics Fetish",
+            "{tr}lyrics Selena Gomez - Same old love",
         ],
     },
 )
@@ -57,7 +57,7 @@ async def _(event):
         "header": "Song lyrics searcher using genius api",
         "note": "For functioning of this command set the GENIUS_API_TOKEN in heroku. Get value from  https://genius.com/developers.",
         "usage": "{tr}glyrics <artist name> - <song name>",
-        "examples": "{tr}glyrics Armaan Malik - butta bomma",
+        "examples": "{tr}glyrics Alan walker - Fake a smile",
     },
 )
 async def lyrics(lyric):
@@ -67,12 +67,12 @@ async def lyrics(lyric):
     else:
         return await edit_or_reply(
             lyric,
-            "Error: please use '-' as divider for <artist> and <song> \neg: `.glyrics Nicki Minaj - Super Bass`",
+            "Error: please use '-' as divider for <artist> and <song> \neg: `{tr}glyrics Alan walker - Fake a smile`",
         )
     if r"-" not in query:
         return await edit_or_reply(
             lyric,
-            "Error: please use '-' as divider for <artist> and <song> \neg: `.glyrics Nicki Minaj - Super Bass`",
+            "Error: please use '-' as divider for <artist> and <song> \neg: `{tr}glyrics Alan walker - Fake a smile`",
         )
     if GENIUS is None:
         return await edit_or_reply(
@@ -97,5 +97,5 @@ async def lyrics(lyric):
         songs = None
     if songs is None:
         return await catevent.edit(f"Song **{artist} - {song}** not found!")
-    reply = f"**Search query**: \n`{artist} - {song}`\n\n```{songs.lyrics}```"
+    reply = f"**Search query**: \n**__{artist} - {song}__**\n\n{songs.lyrics}"
     await edit_or_reply(catevent, reply)
