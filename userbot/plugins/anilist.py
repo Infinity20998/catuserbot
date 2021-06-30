@@ -401,3 +401,103 @@ async def whatanime(event):
                 f'{readable_time(js0["from"])} - {readable_time(js0["to"])}',
                 file=js0["image"],
             )
+            
+
+@catub.cat_cmd(
+    pattern="mal ?(.*)",
+    command=("mal", plugin_category),
+    info={
+        "header": "Search profiles of MAL.",
+        "usage": "{tr}mal <username>",
+        "examples": "{tr}mal Infinity20998",
+    },
+)
+async def user(event):
+    "Search profiles of MAL."
+    search_query = event.pattern_match.group(1)
+    message = await event.get_reply_message()
+    if search_query:
+        pass
+    elif message:
+        search_query = message.text
+    else:
+        await edit_delete(event, "`Format : .MAL <username>`", 5)
+        return
+
+    try:
+        user = jikan.user(search_query)
+    except APIException:
+        await edit_delete(event, "__Username not Found.__", 5)
+        return
+
+    date_format = "%Y-%m-%d"
+    if user["image_url"] is None:
+        img = "https://telegra.ph//file/9b4205e1b1cc68a4ffd5e.jpg"
+    else:
+        img = user["image_url"]
+
+    try:
+        user_birthday = datetime.datetime.fromisoformat(user["birthday"])
+        user_birthday_formatted = user_birthday.strftime(date_format)
+    except BaseException:
+        user_birthday_formatted = "Unknown"
+
+    user_joined_date = datetime.datetime.fromisoformat(user["joined"])
+    user_joined_date_formatted = user_joined_date.strftime(date_format)
+    user_last_online = datetime.datetime.fromisoformat(user["last_online"])
+    user_last_online_formatted = user_last_online.strftime(date_format)
+
+    for entity in user:
+        if user[entity] is None:
+            user[entity] = "Unknown"
+
+    about = user["about"].split(" ", 60)
+
+    try:
+        about.pop(60)
+    except IndexError:
+        pass
+
+    about_string = " ".join(about)
+    about_string = about_string.replace("<br>", "").strip().replace("\r\n", "\n")
+
+    caption = ""
+
+    caption += textwrap.dedent(
+        f"""
+    **Username**: [{user['username']}]({user['url']})
+    **Gender**: `{user['gender']}`
+    **MAL ID**: `{user['user_id']}`
+    **Birthday**: `{user_birthday_formatted}`
+    **Joined**: `{user_joined_date_formatted}`
+    **Last Online**: `{user_last_online_formatted}`
+    
+    **Days wasted watching Anime**: `{user['anime_stats']['days_watched']}`
+    **Days wasted reading Manga**: `{user['manga_stats']['days_read']}`
+    """
+    )
+
+    caption += f"**About**: {about_string}"
+    await event.client.send_file(event.chat_id, file=img, caption=caption)
+    await event.delete()            
+            
+                       
+@catub.cat_cmd(
+    pattern="aq$",
+    command=("aq", plugin_category),
+    info={
+        "header": "Get random Anime quotes.",
+        "usage": "{tr}aq",
+        "examples": "{tr}aq",
+    },
+)
+async def k(message):
+    data = requests.get("https://animechan.vercel.app/api/random").json()
+    anime = data["anime"]
+    character = data["character"]
+    quote = data["quote"]
+    await edit_or_reply(
+        message,
+        f"❍ <b><u>Anime</b></u> (アニメ) <b>:</b>\n ➥ <i>{anime}</i>\n\n❍ <b><u>Character:</b></u> (キャラクター) <b>:</b>\n ➥ <i>{character}</i>\n\n❍ <b><u>Quote:</u></b> (言っている) <b>:</b>\n ➥ <i>{quote}</i>",
+        parse_mode="html",
+    )
