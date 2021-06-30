@@ -64,7 +64,7 @@ async def cmdinfo(input_str, event, plugin=False):
         category = getkey(plugin)
         if category is not None:
             outstr += f"**Category :** `{category}`\n\n"
-    outstr += f"**✘  Intro :**\n{about[0]}"
+    outstr += f"**ᐛ  Intro :**\n{about[0]}"
     return outstr
 
 
@@ -86,11 +86,11 @@ async def plugininfo(input_str, event, flag):
     if category is not None:
         outstr += f"**Category :** `{category}`\n\n"
     for cmd in cmds:
-        outstr += f"•  **cmd :** `{cmdprefix}{cmd}`\n"
+        outstr += f"ᐛ  **cmd :** `{cmdprefix}{cmd}`\n"
         try:
-            outstr += f"•  **info :** `{CMD_INFO[cmd][1]}`\n\n"
+            outstr += f"➥  **info :** `{CMD_INFO[cmd][1]}`\n\n"
         except IndexError:
-            outstr += f"•  **info :** `None`\n\n"
+            outstr += f"➥  **info :** `None`\n\n"
     outstr += f"**👩‍💻 Usage : ** `{cmdprefix}help <command name>`\
         \n**Note : **If command name is same as plugin name then use this `{cmdprefix}help -c <command name>`."
     return outstr
@@ -117,7 +117,7 @@ async def cmdlist():
         outstr += f"**{hemojis[cat]} {cat.title()} ** - {len(plugins)}\n\n"
         for plugin in plugins:
             cmds = PLG_INFO[plugin]
-            outstr += f"• **{plugin.title()} has {len(cmds)} commands**\n"
+            outstr += f"ᐛ **{plugin.title()} has {len(cmds)} commands**\n"
             for cmd in cmds:
                 outstr += f"  - `{cmdprefix}{cmd}`\n"
             outstr += "\n"
@@ -192,7 +192,7 @@ async def _(event):
             return await edit_delete(event, "__Invalid plugin name recheck it.__")
         except Exception as e:
             return await edit_delete(event, f"**Error**\n`{str(e)}`")
-        outstr = f"• **{input_str.title()} has {len(cmds)} commands**\n"
+        outstr = f"ᐛ **{input_str.title()} has {len(cmds)} commands**\n"
         for cmd in cmds:
             outstr += f"  - `{cmdprefix}{cmd}`\n"
         outstr += f"**👩‍💻 Usage : ** `{cmdprefix}help -c <command name>`"
