@@ -403,7 +403,7 @@ async def whatanime(event):
                 f'{readable_time(js0["from"])} - {readable_time(js0["to"])}',
                 file=js0["image"],
             )
-            
+
 
 @catub.cat_cmd(
     pattern="mal ?(.*)",
@@ -481,9 +481,9 @@ async def user(event):
 
     caption += f"**About**: {about_string}"
     await event.client.send_file(event.chat_id, file=img, caption=caption)
-    await event.delete()            
-            
-                       
+    await event.delete()
+
+
 @catub.cat_cmd(
     pattern="aq$",
     command=("aq", plugin_category),

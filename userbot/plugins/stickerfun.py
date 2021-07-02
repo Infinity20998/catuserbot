@@ -7,9 +7,9 @@
 # RegEx by https://t.me/c/1220993104/500653 ( @SnapDragon7410 )
 import io
 import os
-import urllib
 import random
 import textwrap
+import urllib
 
 from PIL import Image, ImageDraw, ImageFont
 from telethon.tl.types import InputMessagesFilterDocument
@@ -17,9 +17,16 @@ from telethon.tl.types import InputMessagesFilterDocument
 from userbot import catub
 
 from ..core.managers import edit_or_reply
-from . import edit_delete
-from ..helpers.functions import deEmojify, hide_inlinebot, waifutxt, clippy, convert_tosticker, higlighted_text
+from ..helpers.functions import (
+    clippy,
+    convert_tosticker,
+    deEmojify,
+    hide_inlinebot,
+    higlighted_text,
+    waifutxt,
+)
 from ..helpers.utils import reply_id
+from . import edit_delete
 
 plugin_category = "fun"
 
@@ -186,7 +193,7 @@ async def twt(event):
     await event.delete()
     await hide_inlinebot(event.client, bot_name, text, event.chat_id, reply_to_id)
 
- 
+
 @catub.cat_cmd(
     pattern="glax(|r)(?:\s|$)([\s\S]*)",
     command=("glax", plugin_category),
@@ -224,8 +231,8 @@ async def glax(event):
     await hide_inlinebot(
         event.client, bot_name, text, event.chat_id, reply_to_id, c_lick=c_lick
     )
-    
-    
+
+
 @catub.cat_cmd(
     pattern="(|b)quby(?:\s|$)([\s\S]*)",
     command=("quby", plugin_category),
