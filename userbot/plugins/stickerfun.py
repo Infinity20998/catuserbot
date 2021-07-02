@@ -49,7 +49,7 @@ async def get_font_file(client, channel_id, search_kw=""):
 
 
 @catub.cat_cmd(
-    pattern="s(ttx)?t(?: |$)([\s\S]*)",
+    pattern="(?:st|sttxt)(?:\s|$)([\s\S]*)",
     command=("sttxt", plugin_category),
     info={
         "header": "Anime that makes your writing fun.",
