@@ -277,7 +277,7 @@ async def _(event):
     "To mark yourself as afk i.e. Away from keyboard (supports media)"
     reply = await event.get_reply_message()
     media_t = media_type(reply)
-    if media_t == "Sticker" or not media_t:
+    if not media_t:
         return await edit_or_reply(
             event, "`You haven't replied to any media to activate media afk`"
         )
