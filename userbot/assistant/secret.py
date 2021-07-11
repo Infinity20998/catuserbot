@@ -22,7 +22,7 @@ async def on_plug_in_callback_query_handler(event):
                     "You are not allowed to see this message, better luck next time!"
                 )
             else:
-                reply_pop_up_alert = encrypted_tcxt
+                reply_pop_up_alert = {encrypted_tcxt}
         except KeyError:
             reply_pop_up_alert = "This message no longer exists in catub server"
     else:
