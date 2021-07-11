@@ -243,7 +243,7 @@ async def inline_handler(event):  # sourcery no-metrics
     string.split()
     query_user_id = event.query.user_id
     if query_user_id == Config.OWNER_ID or query_user_id in Config.SUDO_USERS:
-        hmm = re.compile("hide (.*) (.*)")
+        hmm = re.compile("secret (.*) (.*)")
         match = re.findall(hmm, query)
         if query.startswith("**Catuserbot"):
             buttons = [
