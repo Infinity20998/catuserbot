@@ -356,7 +356,7 @@ async def inline_handler(event):  # sourcery no-metrics
 
             buttons = [Button.inline("show message 🔐", data=f"secret_{timestamp}")]
             result = builder.article(
-                title="secret message",
+                title="Hidden Message",
                 text=f"Only {sandy} cannot access this message!",
                 buttons=buttons,
             )
