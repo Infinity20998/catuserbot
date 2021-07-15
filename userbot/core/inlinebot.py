@@ -321,9 +321,9 @@ async def inline_handler(event):  # sourcery no-metrics
             query = query[7:]
             user, txct = query.split(" ", 1)
             builder = event.builder
-            secret = os.path.join("./userbot", "secrets.txt")
+            hidden = os.path.join("./userbot", "hidden.txt")
             try:
-                jsondata = json.load(open(secret))
+                jsondata = json.load(open(hidden))
             except Exception:
                 jsondata = False
             try:
@@ -363,9 +363,9 @@ async def inline_handler(event):  # sourcery no-metrics
             await event.answer([result] if result else None)
             if jsondata:
                 jsondata.update(newsecret)
-                json.dump(jsondata, open(secret, "w"))
+                json.dump(jsondata, open(hidden, "w"))
             else:
-                json.dump(newsecret, open(secret, "w"))
+                json.dump(newsecret, open(hidden, "w"))
         elif string == "help":
             _result = main_menu()
             result = builder.article(
