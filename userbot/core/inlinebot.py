@@ -245,6 +245,8 @@ async def inline_handler(event):  # sourcery no-metrics
     if query_user_id == Config.OWNER_ID or query_user_id in Config.SUDO_USERS:
         hmm = re.compile("hidden (.*) (.*)")
         match = re.findall(hmm, query)
+        inf = re.compile("secret (.*) (.*)")
+        match2 = re.findall(inf, query)
         if query.startswith("**Catuserbot"):
             buttons = [
                 (
@@ -366,6 +368,55 @@ async def inline_handler(event):  # sourcery no-metrics
                 json.dump(jsondata, open(hidden, "w"))
             else:
                 json.dump(newsecret, open(hidden, "w"))
+        elif match2:
+            query = query[7:]
+            user, txct = query.split(" ", 1)
+            builder = event.builder
+            secret = os.path.join("./userbot", "secrets.txt")
+            try:
+                jsondata = json.load(open(secret))
+            except Exception:
+                jsondata = False
+            try:
+                # if u is user id
+                u = int(user)
+                try:
+                    u = await event.client.get_entity(u)
+                    if u.username:
+                        sandy = f"@{u.username}"
+                    else:
+                        sandy = f"[{u.first_name}](tg://user?id={u.id})"
+                except ValueError:
+                    # ValueError: Could not find the input entity
+                    sandy = f"[user](tg://user?id={u})"
+            except ValueError:
+                # if u is username
+                try:
+                    u = await event.client.get_entity(user)
+                except ValueError:
+                    return
+                if u.username:
+                    sandy = f"@{u.username}"
+                else:
+                    sandy = f"[{u.first_name}](tg://user?id={u.id})"
+                u = int(u.id)
+            except Exception:
+                return
+            timestamp = int(time.time() * 2)
+            newsecret = {str(timestamp): {"userid": u, "text": txct}}
+
+            buttons = [Button.inline("show message 🔐", data=f"secret_{timestamp}")]
+            result = builder.article(
+                title="secret message",
+                text=f"🔒 A whisper message to {sandy}, Only he/she can open it.",
+                buttons=buttons,
+            )
+            await event.answer([result] if result else None)
+            if jsondata:
+                jsondata.update(newsecret)
+                json.dump(jsondata, open(secret, "w"))
+            else:
+                json.dump(newsecret, open(secret, "w"))
         elif string == "help":
             _result = main_menu()
             result = builder.article(
