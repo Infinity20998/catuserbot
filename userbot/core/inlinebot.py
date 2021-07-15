@@ -243,7 +243,7 @@ async def inline_handler(event):  # sourcery no-metrics
     string.split()
     query_user_id = event.query.user_id
     if query_user_id == Config.OWNER_ID or query_user_id in Config.SUDO_USERS:
-        hmm = re.compile("secret (.*) (.*)")
+        hmm = re.compile("hidden (.*) (.*)")
         match = re.findall(hmm, query)
         if query.startswith("**Catuserbot"):
             buttons = [
@@ -354,7 +354,7 @@ async def inline_handler(event):  # sourcery no-metrics
             timestamp = int(time.time() * 2)
             newsecret = {str(timestamp): {"userid": u, "text": txct}}
 
-            buttons = [Button.inline("show message 🔐", data=f"secret_{timestamp}")]
+            buttons = [Button.inline("show message 🔐", data=f"hidden_{timestamp}")]
             result = builder.article(
                 title="Hidden Message",
                 text=f"Only {sandy} cannot access this message!",
