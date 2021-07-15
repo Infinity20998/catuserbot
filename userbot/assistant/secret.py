@@ -28,8 +28,8 @@ async def on_plug_in_callback_query_handler(event):
     else:
         reply_pop_up_alert = "This message no longer exists "
     await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
-    
-    
+
+
 @catub.tgbot.on(CallbackQuery(data=re.compile(b"secret_(.*)")))
 async def on_plug_in_callback_query_handler(event):
     timestamp = int(event.pattern_match.group(1).decode("UTF-8"))
