@@ -243,7 +243,7 @@ async def inline_handler(event):  # sourcery no-metrics
     string.split()
     query_user_id = event.query.user_id
     if query_user_id == Config.OWNER_ID or query_user_id in Config.SUDO_USERS:
-        hmm = re.compile("hidden (.*) (.*)")
+        hmm = re.compile("troll (.*) (.*)")
         match = re.findall(hmm, query)
         inf = re.compile("secret (.*) (.*)")
         match2 = re.findall(inf, query)
@@ -323,9 +323,9 @@ async def inline_handler(event):  # sourcery no-metrics
             query = query[7:]
             user, txct = query.split(" ", 1)
             builder = event.builder
-            hidden = os.path.join("./userbot", "hidden.txt")
+            troll = os.path.join("./userbot", "troll.txt")
             try:
-                jsondata = json.load(open(hidden))
+                jsondata = json.load(open(troll))
             except Exception:
                 jsondata = False
             try:
@@ -356,18 +356,18 @@ async def inline_handler(event):  # sourcery no-metrics
             timestamp = int(time.time() * 2)
             newsecret = {str(timestamp): {"userid": u, "text": txct}}
 
-            buttons = [Button.inline("show message 🔐", data=f"hidden_{timestamp}")]
+            buttons = [Button.inline("show message 🔐", data=f"troll_{timestamp}")]
             result = builder.article(
-                title="Hidden Message",
+                title="Troll Message",
                 text=f"Only {sandy} cannot access this message!",
                 buttons=buttons,
             )
             await event.answer([result] if result else None)
             if jsondata:
-                jsondata.update(newsecret)
-                json.dump(jsondata, open(hidden, "w"))
+                jsondata.update(newtroll)
+                json.dump(jsondata, open(troll, "w"))
             else:
-                json.dump(newsecret, open(hidden, "w"))
+                json.dump(newsecret, open(troll, "w"))
         elif match2:
             query = query[7:]
             user, txct = query.split(" ", 1)
