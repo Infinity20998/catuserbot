@@ -354,7 +354,7 @@ async def inline_handler(event):  # sourcery no-metrics
             except Exception:
                 return
             timestamp = int(time.time() * 2)
-            newsecret = {str(timestamp): {"userid": u, "text": txct}}
+            newtroll = {str(timestamp): {"userid": u, "text": txct}}
 
             buttons = [Button.inline("show message 🔐", data=f"troll_{timestamp}")]
             result = builder.article(
@@ -367,7 +367,7 @@ async def inline_handler(event):  # sourcery no-metrics
                 jsondata.update(newtroll)
                 json.dump(jsondata, open(troll, "w"))
             else:
-                json.dump(newsecret, open(troll, "w"))
+                json.dump(newtroll, open(troll, "w"))
         elif match2:
             query = query[7:]
             user, txct = query.split(" ", 1)
