@@ -190,7 +190,7 @@ async def on_afk(event):  # sourcery no-metrics
             resalt += f"\n<b>Message : </b>{event.message.message}"
         resalt += f"\n<b>Message link: </b><a href = 'https://t.me/c/{hmm.id}/{event.message.id}'> link</a>"
         if not event.is_private:
-            await event.client.tgbot.send_message(
+            await event.client.send_message(
                 Config.PM_LOGGER_GROUP_ID,
                 resalt,
                 parse_mode="html",
