@@ -124,15 +124,11 @@ def paginate_help(
 ):  # sourcery no-metrics
     try:
         number_of_rows = int(gvarstatus("NO_OF_ROWS_IN_HELP") or 5)
-    except ValueError:
-        number_of_rows = 5
-    except TypeError:
+    except (ValueError, TypeError):
         number_of_rows = 5
     try:
         number_of_cols = int(gvarstatus("NO_OF_COLUMNS_IN_HELP") or 2)
-    except ValueError:
-        number_of_cols = 2
-    except TypeError:
+    except (ValueError, TypeError):
         number_of_cols = 2
     HELP_EMOJI = gvarstatus("HELP_EMOJI") or " "
     helpable_plugins = [p for p in loaded_plugins if not p.startswith("_")]
@@ -420,7 +416,7 @@ async def inline_handler(event):  # sourcery no-metrics
             else:
                 json.dump(newsecret, open(secret, "w"))
         elif match3:
-        	query = query[7:]
+            query = query[7:]
             user, txct = query.split(" ", 1)
             builder = event.builder
             hide = os.path.join("./userbot", "hide.txt")
