@@ -417,7 +417,6 @@ async def inline_handler(event):  # sourcery no-metrics
                 json.dump(newsecret, open(secret, "w"))
         elif match3:
             query = query[7:]
-            user, txct = query.split(" ", 1)
             builder = event.builder
             hide = os.path.join("./userbot", "hide.txt")
             try:
@@ -425,7 +424,7 @@ async def inline_handler(event):  # sourcery no-metrics
             except Exception:
                 jsondata = False
             timestamp = int(time.time() * 2)
-            newhide = {str(timestamp): {"userid": u, "text": txct}}
+            newhide = {str(timestamp): {"text": query}}
 
             buttons = [Button.inline("Read Message ", data=f"hide_{timestamp}")]
             result = builder.article(
