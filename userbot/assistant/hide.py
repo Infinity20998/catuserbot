@@ -13,13 +13,7 @@ async def on_plug_in_callback_query_handler(event):
     if os.path.exists("./userbot/hide.txt"):
         jsondata = json.load(open("./userbot/hide.txt"))
         try:
-            message = jsondata[f"{timestamp}"]
-            ids = None
-            if event.query.user_id in ids:
-                reply_pop_up_alert = "Hidden Message"
-            else:
-                encrypted_tcxt = message["text"]
-                reply_pop_up_alert = encrypted_tcxt
+            reply_pop_up_alert = jsondata[f"{timestamp}"]["text"]
         except KeyError:
             reply_pop_up_alert = "This message no longer exists in catub server"
     else:
