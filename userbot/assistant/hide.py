@@ -14,8 +14,6 @@ async def on_plug_in_callback_query_handler(event):
         jsondata = json.load(open("./userbot/hide.txt"))
         try:
             message = jsondata[f"{timestamp}"]
-            ids = [None]
-            if event.query.user_id not in ids:
                 encrypted_tcxt = message["text"]
                 reply_pop_up_alert = encrypted_tcxt
         except KeyError:
