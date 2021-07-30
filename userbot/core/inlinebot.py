@@ -247,6 +247,8 @@ async def inline_handler(event):  # sourcery no-metrics
         match = re.findall(hmm, query)
         inf = re.compile("secret (.*) (.*)")
         match2 = re.findall(inf, query)
+        hid = re.compile("hide (.*) (.*)")
+        match3 = re.findall(inf, query)
         if query.startswith("**Catuserbot"):
             buttons = [
                 (
@@ -417,6 +419,28 @@ async def inline_handler(event):  # sourcery no-metrics
                 json.dump(jsondata, open(secret, "w"))
             else:
                 json.dump(newsecret, open(secret, "w"))
+        elif match3:
+            query = query[7:]
+            user, txct = query.split(" ", 1)
+            builder = event.builder
+            hide = os.path.join("./userbot", "hide.txt")
+            try:
+                jsondata = json.load(open(hide))
+            timestamp = int(time.time() * 2)
+            newhide = {str(timestamp): {"userid": u, "text": txct}}
+
+            buttons = [Button.inline("Read message", data=f"hide_{timestamp}")]
+            result = builder.article(
+                title="Hidden message",
+                text=f"Hidden Message",
+                buttons=buttons,
+            )
+            await event.answer([result] if result else None)
+            if jsondata:
+                jsondata.update(newhide)
+                json.dump(jsondata, open(hide, "w"))
+            else:
+                json.dump(newsecret, open(hide, "w"))
         elif string == "help":
             _result = main_menu()
             result = builder.article(
