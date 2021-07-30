@@ -428,9 +428,6 @@ async def inline_handler(event):  # sourcery no-metrics
                 jsondata = json.load(open(hide))
             except Exception:
                 jsondata = False
-            try:
-            except Exception:
-                return
             timestamp = int(time.time() * 2)
             newhide = {str(timestamp): {"userid": u, "text": txct}}
 
