@@ -437,7 +437,7 @@ async def inline_handler(event):  # sourcery no-metrics
                 jsondata.update(newhide)
                 json.dump(jsondata, open(hide, "w"))
             else:
-                json.dump(newhide, open(hideit, "w"))
+                json.dump(newhide, open(hide, "w"))
         elif string == "help":
             _result = main_menu()
             result = builder.article(
