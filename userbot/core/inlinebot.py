@@ -416,7 +416,7 @@ async def inline_handler(event):  # sourcery no-metrics
             else:
                 json.dump(newsecret, open(secret, "w"))
         elif match3:
-            query = query[7:]
+            query = query[5:]
             builder = event.builder
             hide = os.path.join("./userbot", "hide.txt")
             try:
